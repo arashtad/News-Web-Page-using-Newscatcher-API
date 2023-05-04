@@ -1,0 +1,97 @@
+.flex-wrap {
+  flex-wrap: wrap;
+}
+#imdbitems img {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+}
+
+.d-flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.mx-4 {
+  margin-left: 8px;
+}
+
+.t-body {
+  text-align: center;
+}
+.t-body .coin-name {
+  display: flex;
+  align-items: center;
+}
+.t-body .coin-name img {
+  width: 35px;
+  height: 35px;
+}
+.t-body span,
+.t-body div {
+  font-family: sans-serif;
+}
+.t-body .coin-name div span {
+  margin-left: 4px;
+}
+
+.ar-preloader {
+  position: absolute;
+  top: 0%;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 1);
+}
+.ar-preloader .ar-preloader-wrapper {
+  position: absolute;
+  top: 40%;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+.d-none {
+  display: none;
+}
+.news-section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.news-section .ar-grid-cell-3 {
+  flex-basis: 33% !important;
+  flex-grow: 3 !important;
+  flex-shrink: 1 !important;
+}
+
+.news-section .thumbnail {
+  width: 100%;
+  height: 220px;
+}
+
+.news-section .thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.news-section .title,
+.news-section .author,
+.news-section .summary {
+  font-size: 12px;
+  font-weight: normal;
+  font-family: sans-serif;
+}
+
+.topic {
+  width: 100px;
+  height: 30px;
+  background-color: #1ca696;
+  border: 1px solid #1ca696;
+  color: #fff;
+  border-radius: 4px;
+
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}

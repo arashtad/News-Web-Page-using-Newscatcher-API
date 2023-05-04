@@ -1,0 +1,151 @@
+<!--
+  __    ___    __    __   _    _____   __    ___
+ / /\  | |_)  / /\  ( (` | |_|  | |   / /\  | | \
+/_/--\ |_| \ /_/--\ _)_) |_| |  |_|  /_/--\ |_|_/
+
+*** Product Name:    Sci-Fi Game UI
+*** Description:     UI elements pack for Sci-Fi games.
+*** Author:          Arashtad
+*** Author URI:      https://arashtad.com
+*** Version:         1.0.0
+*** Creation Date:   Nov 21, 2022
+*** License:         GNU General Public License V3
+*** Copyright:       (C) 2022 - Arashtad.com. All Rights Reserved.
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="scifi, ui pack, ui framework, sci-fi framework, sci-fi elements pack">
+    <meta name="description" content="Arashtad Sci-Fi UI Elements Pack is a free and open source product suitable for Sci-Fi type web pages, games, etc.">
+    <title>News Project</title>
+    <link rel="stylesheet" href="../css/master.min.css">
+    <link rel="stylesheet" href="../css/overlay-scrollbars.min.css">
+    <link rel="stylesheet" href="../fonts/fontawesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/custom.css">
+</head>
+</head>
+<body>
+    <a href="../" class="ar-button small margin">
+        <span class="fa fa-home"></span> Home
+    </a>
+    <main>
+        <div class="ar-container">
+            <h1 class="center">News Project</h1>
+            <div class="spacer-20"></div>
+    
+            <div class="center">
+              <select name="topic" class="topic" onchange="topicOnChangeHandler()">
+                <option value="sport">sport</option>
+                <option value="tech">tech</option>
+                <option value="world">world</option>
+                <option value="finance">finance</option>
+                <option value="politics">politics</option>
+                <option value="business">business</option>
+                <option value="travel">travel</option>
+                <option value="music">music</option>
+                <option value="beauty">beauty</option>
+                <option value="food">food</option>
+                <option value="gaming" selected>gaming</option>
+              </select>
+            </div>
+    
+            <div class="ar-grid">
+              <div class="ar-grid-row news-section"></div>
+            </div>
+            <div class="spacer-20"></div>
+          </div>
+        </main>
+    <footer>
+        <div class="ar-block center">
+            &copy; 2023 - <a href="https://arashtad.com">Arashtad.com</a>. All Rights Reserved.
+        </div>
+    </footer>
+    <!-- preloader -->
+    <div class="ar-preloader">
+        <div class="ar-preloader-wrapper">
+          <ul>
+            <li>Loading</li>
+            <li>.</li>
+            <li>.</li>
+            <li>.</li>
+          </ul>
+        </div>
+      </div>
+
+    <script>
+        const apiKey = "vEXC1t2-pu2uOf92D_ER1zlEgTXxAznX7oWRis9T__M";
+        const endPoint = "https://api.newscatcherapi.com";
+
+        let topic = document.querySelector('.topic').value;
+        
+        function topicOnChangeHandler(){
+            preLoaderHandler()
+            topic = document.querySelector('.topic').value;
+            newsHandler();
+        }
+
+        function preLoaderHandler(){
+            document.querySelector(".ar-preloader").classList.toggle('d-none');
+        }
+
+        async function newsHandler(){
+            const newsSection = document.querySelector('.news-section')
+            newsSection.innerHTML = "";
+
+            const apiHandler =await fetch(
+                `${endPoint}/v2/latest_headlines?countries=US&topic=${topic}&page_size=30`,
+                {
+                method: "GET",
+                headers: {
+                    "x-api-key": apiKey,
+                },
+            });
+            const response = await apiHandler.json();
+
+            if (response.status == "ok"){
+                preLoaderHandler();
+
+                response.articles.map((article) => {
+                    newsSection.innerHTML += `
+            <div class="ar-grid-cell-3">
+              <div class="ar-block-30">
+                <a href=${article.link} target="_blank">
+                  <div class="ar-card">
+                    <div class="ar-card-block">
+                      <div class="ar-block center">
+                        <div class="thumbnail"><img src=${
+                          article.media
+                        } /></div>
+                        <h4 class="title left justify ">${article.title.slice(
+                          0,
+                          100
+                        )}</h4>
+                        <p class="summary justify">${article.summary.slice(
+                          0,
+                          150
+                        )}</p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>`;
+                });
+            }else {
+                console.log(response)
+            } 
+        }
+        document.addEventListener("DOMContentLoaded",() => {
+            newsHandler();
+        })
+    </script>
+    <script src="../js/jquery-3.6.1.min.js" crossorigin="anonymous"></script>
+    <script src="../js/overlay-scrollbars.min.js"></script>
+    <script src="../js/custom-jquery.js"></script>
+</body>
+</html>
